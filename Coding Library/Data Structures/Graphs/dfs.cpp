@@ -44,7 +44,7 @@ void dfs(vector<vector<int> > g,int n){
 
 	for(int u=0;u<n;u++){
 		if(vertex[u].color=="WHITE")
-			DFS_VISIT(g,vertex,2,time);
+			DFS_VISIT(g,vertex,u,time);
 	}
 
 }

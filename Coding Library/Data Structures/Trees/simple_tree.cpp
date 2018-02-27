@@ -1,4 +1,4 @@
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
 
 struct Node
@@ -45,11 +45,11 @@ void inOrder(Node *root) {
     }
 }
 
-void levelOrder(node * root) {
-    queue<node*>q;
+void levelOrder(Node * root) {
+    queue<Node*>q;
     q.push(root);
     while(!q.empty()){
-        node *n=q.front();
+        Node *n=q.front();
         q.pop();
         cout<<n->data<<" ";
         if(n->left!=NULL)
