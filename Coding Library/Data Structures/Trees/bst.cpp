@@ -11,7 +11,7 @@ typedef struct node
 }node;
 
 
-node * insert(node * root, int value) {
+node *insert(node * root, int value) {
     
     if(root==NULL){
         node *temp=new node;
@@ -89,6 +89,46 @@ bool checkBST(node* root) {
       return f;
 }
 
+node *inOrderSucc(node *root){  // get the minimum element in right subtree
+
+    node *curr = root;
+    while(curr->left != NULL)
+        curr = curr->left;
+
+    return curr;
+}
+
+node *deleteNode(node *root,int key){
+
+    if(root == NULL){
+        return NULL;
+    }
+    else if(key < root->data)
+        root->left = deleteNode(root->left,key);
+    else if(key > root->data)
+        root->right = deleteNode(root->right,key);
+    else{                                                   // match found
+
+        if(root->left == NULL){                            // either no child or only right child
+            node *temp = root->right;
+            delete root;
+            return temp;
+        }
+        else if(root->right == NULL){                       // only left child
+            node *temp = root->left;
+            delete root;
+            return temp;
+        }
+        else{                                               // both left and right child
+            node *temp = inOrderSucc(root->right);          // replace that node by inorder successor or predecessor    
+            root->data = temp->data;
+            root->right = deleteNode(root->right,temp->data);  // delete the inorder successor
+        }
+    }
+
+    return root;
+}
+
 int main(int argc, char const *argv[])
 {
     node *root = insert(root, 50);
@@ -101,6 +141,9 @@ int main(int argc, char const *argv[])
     inOrder(root);
     cout<<endl;
     cout<<lca(root,40,60)->data<<endl;
-    cout<<search(root,40)->data;    
+    //cout<<search(root,40)->data;
+    root=deleteNode(root,50);
+    inOrder(root);
+    cout<<endl;    
     return 0;
 }
