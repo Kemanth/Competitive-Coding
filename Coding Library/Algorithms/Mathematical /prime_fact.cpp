@@ -5,12 +5,14 @@ using namespace std;
 
 void prime_fact(int n)
 {
-   while(n%2 == 0){
+   while(n%2 == 0){    				//handle even numbers
+
    		cout<<2<<" ";
    		n/=2;		
    }
 
-   for(int i = 3; i<=sqrt(n); i+=2){
+   for(int i = 3; i<=sqrt(n); i+=2){  //handle odd numbers
+
    		while(n%i == 0){
 
    			cout<<i<<" ";
@@ -18,7 +20,7 @@ void prime_fact(int n)
    		}		
    }
 
-   if(n>2)
+   if(n>2)							//handle prime numbers
    		cout<<n<<" ";
 }
  
