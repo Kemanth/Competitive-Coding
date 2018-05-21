@@ -2,38 +2,50 @@
 using namespace std;
 
 string convert(string A, int B) {
-    vector<vector<string> >ans;
-    int dir = 0, i = 0;
-    cout<<"ss";
-    while(i < A.size()-1){
-        cout<<"ss";
+    vector<char>ans[B];
+    int dir = 1, i = 0;
+    int j =  0;
+    if(A.size() == 0 || A.size() == 1 || B == 1){
+        return A;
+    }
+    for(j=0;j<B;j++){
+        ans[j].push_back(A[i]);
+        i++;
+    }
+    while(i < A.size()){
+        //cout<<i<<endl;
         if(dir==0){
-            cout<<"ss";
-            for(int j=0;j<B;j++){
-                ans[j].push_back(A[i] + "");
-                cout<<A[i]<<endl;
+            for(int j=1;j<B;j++){
+                ans[j].push_back(A[i]);
+                //cout<<A[i]<<endl;
                 i++;
             }
+            //cout<<"......................"<<endl;
             dir=1;
         }
         else if(dir==1){
-            for(int j=B-1;j>=0;j--){
-                ans[j].push_back(A[i] + "");
+            for(int j=B-2;j>=0;j--){
+                ans[j].push_back(A[i]);
                 i++;
             }
-            dir=1;
+            
+            dir=0;
         }
     }
     string res="";
 
-    for(int i=0;i<ans.size();i++){
-        for(int j=0;j<ans[0].size();j++){
-            res+=ans[i][j];
+    for(int i=0;i<B;i++){
+        for(int j=0;j<ans[i].size();j++){
+            res.push_back(ans[i][j]);
         }
+    }
+    if(!isalpha(res[res.size()-1])){
+        res.erase(res.size()-1);
     }
     return res;
 }
 
 int main(){
-    cout<<convert("PAYPALISHIRING", 3);
+    cout<<convert("ABCDEFGHIJKLMNOPQRS", 6)<<endl;
+    return 0;
 }
