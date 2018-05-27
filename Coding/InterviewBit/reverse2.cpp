@@ -33,45 +33,49 @@ ListNode *Insert_Tail(ListNode *head,int val)
     }
     return head;
 }
-ListNode* deleteDuplicates(ListNode* A) {
-    ListNode *curr, *next, *prev;
+ListNode* reverseBetween(ListNode* A, int B, int C) {
+    ListNode *curr, *prev, *next, *start1, *start2, *end1, *end2;
     prev = NULL;
+    if(A==NULL)
+        return NULL;
     curr = A;
-    while(curr->next!=NULL){
-        if(curr->val == curr->next->val){
-            //cout<<curr->val<<" "<<prev->val<<endl;
-            while(curr->next!=NULL && curr->val==curr->next->val){
-                curr = curr->next;
-            }
-            if(prev == NULL){
-                A = curr->next;
-            }
-            else{
-                prev->next = curr->next;
-            }
-            if(curr->next == NULL)
-                return A;
-            else
-                curr = curr->next;
-
-        }
-        else{
-            prev = curr;
-            curr = curr->next;
-        }
-
+    for(int i=0;i<B-1;i++){
+        prev = curr;
+        curr = curr->next;
     }
+    start1 = prev;
+    start2 = curr;
+
+    for(int i=0;i<C-B+1;i++){
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    end1 = prev;
+    end2 = curr;
+
+    if(start1 == NULL){
+        start2->next = end2;
+        return end1;
+    }
+    else{
+      start1->next = end1;
+      start2->next = end2;
+    }
+
     return A;
 }
 
+
 int main(){
-    int val[]={1,1,1,1,2,2};
-    int n=6;
+    int val[]={1,2,3,4,5};
+    int n=5;
     ListNode *head=NULL;
     for(int i=0;i<n;i++){
         head=Insert_Tail(head,val[i]);
     }
     printList(head);
-    head = deleteDuplicates(head);
+    head = reverseBetween(head,1,5);
     printList(head);
 }
