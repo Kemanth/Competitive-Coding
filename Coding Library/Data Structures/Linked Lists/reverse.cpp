@@ -13,7 +13,7 @@ Node *Insert_Tail(Node *head,int data)
     Node *temp=new Node;
     temp->data=data;
     temp->next=NULL;
-    
+
     if(head==NULL){
         head=temp;
     }
@@ -26,25 +26,26 @@ Node *Insert_Tail(Node *head,int data)
     }
     return head;
 }
-
+Node *NewHead;
 Node* reverse_recur(Node *p)
 {
-  
-    if(p->next==NULL){
 
-        return p;
-    }
-    else{
-        Node *NewHead=reverse_recur(p->next);
-        p->next->next=p;
-        p->next=NULL;
+    if(p->next==NULL){
+        NewHead = p
         return NewHead;
     }
+    else{
+        reverse_recur(p->next);
+        p->next->next=p;
+        p->next=NULL;
+
+    }
+    return NewHead;
 }
 
 Node* Reverse_iter(Node *head)
 {
-  
+
     Node *curr,*prev,*next;
     curr=head;
     prev=NULL;
@@ -57,7 +58,7 @@ Node* Reverse_iter(Node *head)
             prev=curr;
             curr=next;
         }
-        
+
     }
     head=prev;
     return head;
