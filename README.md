@@ -1,2 +1,3 @@
 # Competitive-Coding
-This repo is providing code for popular alogrithms.
+This repository is providing code for popular alogrithms.
+
