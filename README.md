@@ -1,2 +1,2 @@
 # Competitive-Coding
-Repository
+Repository is about standard algorithm.
